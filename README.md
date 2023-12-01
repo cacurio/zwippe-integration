@@ -33,3 +33,5 @@ query {
   }
 }
 ```
+
+Postman collection -> https://api.postman.com/collections/16349558-c0c5ea09-86d6-4b7b-8f32-126197f7f5bb?access_key=PMAT-01HGHCPA7JGTX16CGE7RX6ER8Q
