@@ -1,23 +1,19 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-//import databaseConfig from './config/database.config';
-
-// TypeOrmModule.forRoot(databaseConfig())
+import { FormatResponseMiddleware } from './transactions/middleware/format.response.middleware';
+import { ConfigModule } from '@nestjs/config';
+import databaseConfig from './config/database.config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TransactionsModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5433,
-      username: 'root',
-      password: 'root',
-      database: 'zwippe',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(databaseConfig()),
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(FormatResponseMiddleware).forRoutes('*');
+  }
+}

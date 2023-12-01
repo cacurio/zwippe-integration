@@ -6,13 +6,15 @@ export class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
   @Column({ name: 'external_id', nullable: false })
-  externalId: string;
-  @Column({ name: 'number_account', nullable: false })
-  numberAccount: string;
+  externalId: number;
+  @Column({ name: 'account', nullable: false })
+  account: string;
   @Column({ name: 'status', nullable: false })
   status: string;
   @Column({ name: 'created_at' })
   createdAt: Date;
+  @Column({ name: 'amount', type: 'decimal', precision: 10, scale: 2 })
+  amount: number;
 
   public static convertFromDTO(
     transactionDTO: TransactionDTO,
@@ -21,8 +23,9 @@ export class Transaction {
     const newTransaction = new Transaction();
     newTransaction.externalId = transactionDTO.externalId;
     newTransaction.status = status;
-    newTransaction.numberAccount = transactionDTO.numberAccount;
+    newTransaction.account = transactionDTO.account;
     newTransaction.createdAt = new Date();
+    newTransaction.amount = transactionDTO.amount;
     return newTransaction;
   }
 }
