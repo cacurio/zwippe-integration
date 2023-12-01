@@ -1,0 +1,14 @@
+// schema.gql
+
+
+type TransactionModel {
+    id:Number!
+    amount:Float!
+    status:String!
+    createdAt:String!
+    externalId:String!
+}
+
+type Query {
+    transaction(id:Number!):TransactionModel!
+}

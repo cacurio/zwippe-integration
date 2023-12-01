@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Transaction } from './entity/transaction.entity';
 import { APP_PIPE } from '@nestjs/core';
 import { ZodValidationPipe } from 'nestjs-zod';
+import { TransactionResolver } from './transaction.resolver';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Transaction])],
@@ -15,6 +16,8 @@ import { ZodValidationPipe } from 'nestjs-zod';
       provide: APP_PIPE,
       useClass: ZodValidationPipe,
     },
+    TransactionResolver,
   ],
+  exports: [TransactionsService],
 })
 export class TransactionsModule {}

@@ -27,6 +27,10 @@ export class TransactionsService {
     return id;
   }
 
+  async findOne(id: number): Promise<Transaction> {
+    return await this.transactionRepository.findOne({ where: { id } });
+  }
+
   private saveTransaction(
     transactionDTO: TransactionDTO,
     status: TransactionType,

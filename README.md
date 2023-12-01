@@ -15,3 +15,21 @@ java version 17.x
 ```bash
 $ /.gradlew bootRun
 ```
+
+# GraphQL playground
+
+```bash
+http://localhost:3000/graphql
+```
+
+Query example:
+
+```graphql
+query {
+  transaction(id: 123) {
+    status
+    account
+    amount
+  }
+}
+```
